@@ -1,43 +1,47 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Arquivo: .github/workflows/static.yml
+
+name: Deploy de Projeto Compilado (Build)
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    branches:
+      - principais # Executa sempre que há commit no branch 'principais'
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build_and_deploy:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout
+      - name: Checkout do Código
         uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
+
+      # 1. Configura o ambiente Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Versão recomendada do Node. Mude se seu projeto precisar de outra.
+
+      # 2. Instala as dependências (lê o package.json e instala o que precisa)
+      - name: Instalar Dependências
+        run: npm install 
+
+      # 3. Compila o projeto (comando npm run build)
+      - name: Construir Projeto
+        run: npm run build 
+
+      # 4. Configura o GitHub Pages
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v4
+        with:
+          static_site_generator: 'none'
+
+      # 5. Faz o Upload do Artefato (a pasta 'build' que contém o index.html final)
+      - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
+          path: './build' # *** ATENÇÃO: Se a pasta de saída do seu projeto for 'dist', troque './build' por './dist' ***
+
+      # 6. Publica no GitHub Pages
+      - name: Deploy para GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
