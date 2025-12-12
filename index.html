@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini Nova</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom scrollbar for Webkit browsers */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #18181b; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #3f3f46; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #52525b; 
+      }
+      @keyframes pulse-subtle {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+      .animate-pulse-subtle {
+        animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      /* Loader for Spline */
+      .loader {
+        width: 32px;
+        height: 32px;
+        border: 3px solid #FFF;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
+      @keyframes rotation {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.1",
+    "framer-motion": "https://esm.sh/framer-motion@12.0.0-alpha.1?external=react,react-dom",
+    "clsx": "https://esm.sh/clsx",
+    "tailwind-merge": "https://esm.sh/tailwind-merge",
+    "@splinetool/react-spline": "https://esm.sh/@splinetool/react-spline?external=react,react-dom",
+    "@splinetool/runtime": "https://esm.sh/@splinetool/runtime",
+    "@tsparticles/react": "https://esm.sh/@tsparticles/react@3.0.0?external=react,react-dom",
+    "@tsparticles/engine": "https://esm.sh/@tsparticles/engine@3.0.0",
+    "@tsparticles/slim": "https://esm.sh/@tsparticles/slim@3.0.0",
+    "three": "https://esm.sh/three@0.160.0",
+    "@radix-ui/react-slot": "https://esm.sh/@radix-ui/react-slot",
+    "class-variance-authority": "https://esm.sh/class-variance-authority"
+  }
+}
+</script>
+</head>
+  <body class="bg-zinc-950 text-zinc-100 antialiased">
+    <div id="root"></div>
+  </body>
+</html>

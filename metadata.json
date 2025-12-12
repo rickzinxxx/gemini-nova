@@ -1,0 +1,5 @@
+{
+  "name": "Gemini Nova",
+  "description": "Uma interface premium e rica em recursos para os modelos Gemini do Google. Suporta texto, análise de imagem e modos avançados de raciocínio.",
+  "requestFramePermissions": []
+}
